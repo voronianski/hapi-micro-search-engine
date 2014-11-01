@@ -28,7 +28,7 @@ describe('micro search engine', function () {
             });
         });
 
-        it('return 200 status code', function (done) {
+        it('should return 200 status code', function (done) {
             response.statusCode.should.equal(200);
             done();
         });
@@ -45,7 +45,7 @@ describe('micro search engine', function () {
                 });
             });
 
-            it('return 200 status code', function (done) {
+            it('should return 200 status code', function (done) {
                 response.statusCode.should.equal(200);
                 done();
             });
@@ -61,12 +61,12 @@ describe('micro search engine', function () {
                     });
                 });
 
-                it('return 200 status code', function (done) {
+                it('should return 200 status code', function (done) {
                     response.statusCode.should.equal(200);
                     done();
                 });
 
-                it('return array of words that start with "foo"', function (done) {
+                it('should return array of words that start with "foo"', function (done) {
                     response.result.should.be.an.Array.and.have.length(2);
                     done();
                 });
@@ -95,7 +95,7 @@ describe('micro search engine', function () {
             });
         });
 
-        it('return 400 status code', function (done) {
+        it('should return 400 status code', function (done) {
             response.statusCode.should.equal(400);
             done();
         });
@@ -114,12 +114,12 @@ describe('micro search engine', function () {
             });
         });
 
-        it('return 200 status code', function (done) {
+        it('should return 200 status code', function (done) {
             response.statusCode.should.equal(200);
             done();
         });
 
-        it('return an empty array', function (done) {
+        it('should return an empty array', function (done) {
             response.result.should.be.an.Array.and.have.length(0);
             done();
         });
