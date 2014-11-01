@@ -10,7 +10,7 @@ var options = {
     router: {stripTrailingSlash: true},
     debug: {request: (env === 'test' ? false : ['error'])}
 };
-var server = module.exports = Hapi.createServer('127.0.0.1', 8000, options);
+var server = module.exports = Hapi.createServer(8000, options);
 
 var memory = [];
 
