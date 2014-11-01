@@ -34,7 +34,7 @@ array in this case).
 
 ## Important Notes
 
-* Your server should listen on port 8000.
+* Your server should listen on port `8000`.
 * Your server should be written in javascript or coffeescript and use node.js.
 * Your submission should consist of 1 file of code and 1 package.json file.
 * I should be able to execute your server by running npm install && npm start.
