@@ -102,20 +102,25 @@ describe('micro search engine', function () {
     });
 
     describe('when GETting NON-existing string with /search endpoint', function () {
+        var response;
+
         before(function (done) {
             server.inject({
                 method: 'GET',
                 url: '/search/abracadabra!',
             }, function (res) {
+                response = res;
                 done();
             });
         });
 
         it('return 200 status code', function (done) {
+            response.statusCode.should.equal(200);
             done();
         });
 
         it('return an empty array', function (done) {
+            response.result.should.be.an.Array.and.have.length(0);
             done();
         });
     });
