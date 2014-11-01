@@ -12,7 +12,6 @@ var options = {
 };
 var server = module.exports = Hapi.createServer('127.0.0.1', 8000, options);
 
-// Routes
 var memory = [];
 
 server.route({
@@ -32,8 +31,27 @@ server.route({
 server.route({
     method: 'GET',
     path: '/search/{string}',
-    handler: function (request, reply) {
+    config: {
+        validate: {
+            params: {
+                string: Joi.string().trim()
+            }
+        },
+        handler: function (request, reply) {
+            var results = memory
+                .map(function (word) {
+                    return word.toLowerCase();
+                })
+                .filter(function (word) {
+                    word = String(word);
+                    var starts = String(request.params.string).toLowerCase();
 
+                    // latest benchmarks on startsWith implementations - http://jsperf.com/starts-with/15
+                    return word.length >= starts.length && word.slice(0, starts.length) === starts;
+                });
+
+            reply(results || []);
+        }
     }
 });
 

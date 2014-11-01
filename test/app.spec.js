@@ -21,7 +21,7 @@ describe('micro search engine', function () {
             server.inject({
                 method: 'POST',
                 url: '/dictionary',
-                payload: ['one', 'two', 'three']
+                payload: ['foo', 'bar', 'Foogazi', 'Blitzkrieg Bop!', 'androids', 'gogofoo']
             }, function (res) {
                 response = res;
                 done();
@@ -36,40 +36,48 @@ describe('micro search engine', function () {
         describe('when POSTing doublicates to /dictionary endpoint', function () {
             before(function (done) {
                 server.inject({
-                    method: 'GET',
-                    url: '/search/foo',
+                    method: 'POST',
+                    url: '/dictionary',
+                    payload: ['foo', 'bar']
                 }, function (res) {
+                    response = res;
                     done();
                 });
             });
 
             it('return 200 status code', function (done) {
+                response.statusCode.should.equal(200);
                 done();
             });
 
-            it('return array of words', function (done) {
-                done();
+            describe('when GETting existing string with /search endpoint', function () {
+                before(function (done) {
+                    server.inject({
+                        method: 'GET',
+                        url: '/search/Foo',
+                    }, function (res) {
+                        response = res;
+                        done();
+                    });
+                });
+
+                it('return 200 status code', function (done) {
+                    response.statusCode.should.equal(200);
+                    done();
+                });
+
+                it('return array of words that start with "foo"', function (done) {
+                    response.result.should.be.an.Array.and.have.length(2);
+                    done();
+                });
+
+                it('should contain strings that are lowercase and without doublicates', function (done) {
+                    response.result[0].should.equal('foo');
+                    response.result[1].should.equal('foogazi');
+                    done();
+                });
             });
         });
-
-        // describe('when GETting existing string with /search endpoint', function () {
-        //     before(function (done) {
-        //         server.inject({
-        //             method: 'GET',
-        //             url: '/search/foo',
-        //         }, function (res) {
-        //             done();
-        //         });
-        //     });
-
-        //     it('return 200 status code', function (done) {
-        //         done();
-        //     });
-
-        //     it('return array of words', function (done) {
-        //         done();
-        //     });
-        // });
     });
 
 
@@ -94,21 +102,21 @@ describe('micro search engine', function () {
     });
 
     describe('when GETting NON-existing string with /search endpoint', function () {
-        // before(function (done) {
-        //     server.inject({
-        //         method: 'GET',
-        //         url: '/search/abracadabra!',
-        //     }, function (res) {
-        //         done();
-        //     });
-        // });
+        before(function (done) {
+            server.inject({
+                method: 'GET',
+                url: '/search/abracadabra!',
+            }, function (res) {
+                done();
+            });
+        });
 
-        // it('return 200 status code', function (done) {
-        //     done();
-        // });
+        it('return 200 status code', function (done) {
+            done();
+        });
 
-        // it('return an empty array', function (done) {
-        //     done();
-        // });
+        it('return an empty array', function (done) {
+            done();
+        });
     });
 });
