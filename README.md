@@ -1,6 +1,6 @@
 # Micro Search Engine
 
-[![build status](http://img.shields.io/travis/voronianski/hapi-micro-search-engine.png?style=flat)](https://travis-ci.org/voronianski/hapi-micro-search-engine)
+[![build status](http://img.shields.io/travis/voronianski/hapi-micro-search-engine.svg?style=flat)](https://travis-ci.org/voronianski/hapi-micro-search-engine)
 
 The task was to implement a simple search API which accepts a word list
 and enables the searching of words in that list that start with a
