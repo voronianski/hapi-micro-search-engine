@@ -13,19 +13,21 @@ following two endpoints:
 
 The dictionary of words to search through.
 
-Input: JSON containing an array of words, e.g. [ "foo", "bar", ..., ]
-Output: Return an HTTP 200 status for valid data.
+**Input**: JSON containing an array of words, e.g. `["foo", "bar", ...]`
+
+**Output**: Return an HTTP 200 status for valid data.
 
 ## Search
 
 ### `GET /search/:string`
 
-All words that start with :string - e.g. `/search/foo` should return all
-words inthe supplied dictionary starting with foo, including foo
+All words that start with `:string` - e.g. `/search/foo` should return all
+words in the supplied dictionary starting with `foo`, including `foo`
 itself.
 
-Input: the string, specified in the URL.
-Output: A JSON array of words in the dictionary which start with the
+**Input**: the string, specified in the URL.
+
+**Output**: A JSON array of words in the dictionary which start with the
 specified string, all in lower case. Should return an HTTP 200 status
 for valid data, even if no words are found (just return an empty JSON
 array in this case).
