@@ -32,7 +32,7 @@ specified string, all in lower case. Should return an HTTP 200 status
 for valid data, even if no words are found (just return an empty JSON
 array in this case).
 
-## Important Notes
+<!-- ## Important Notes
 
 * Your server should listen on port `8000`.
 * Your server should be written in javascript or coffeescript and use node.js.
@@ -49,4 +49,4 @@ http://en.wikipedia.org/wiki/List_of_HTTP_status_codes#4xx_Client_Error)
 * Duplicates should be eliminated from the input word list.
 * I am a strange user who wants to send ~1500 search terms in quick
 succession and want results back as quickly as possible - the faster
-the better. Indulge me :-)
+the better. Indulge me :-) -->

@@ -10,18 +10,17 @@ var options = {
     router: {stripTrailingSlash: true},
     debug: {request: (env === 'test' ? false : ['error'])}
 };
-var server = Hapi.createServer('127.0.0.1', 8000, options);
+var server = module.exports = Hapi.createServer('127.0.0.1', 8000, options);
 
+// Routes
 var memory = [];
-
-module.exports = server;
 
 server.route({
     method: 'POST',
     path: '/dictionary',
     config: {
         validate: {
-            payload: Joi.array().min(1).includes(Joi.string()).unique()
+            payload: Joi.array().min(1).includes(Joi.string())
         },
         handler: function (request, reply) {
             memory = _.uniq(memory.concat(request.payload));
@@ -38,6 +37,7 @@ server.route({
     }
 });
 
+// Do not start server on test environment
 if (!module.parent) {
     server.pack.register([Good], function (err) {
         if (err) {
