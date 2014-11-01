@@ -1,7 +1,7 @@
 require('should');
 
 var Lab = require('lab');
-var Server = require('../app');
+var server = require('../app');
 
 var lab = exports.lab = Lab.script();
 var describe = lab.describe;
@@ -9,13 +9,106 @@ var it = lab.it;
 var before = lab.before;
 
 describe('micro search engine', function () {
-    describe('when POSTing to /dictionary endpoint', function () {
-        describe('when GETting existing string with /search endpoint', function () {
+    it('should be ok', function (done) {
+        server.should.be.ok;
+        done();
+    });
 
+    describe('when POSTing to /dictionary endpoint with valid data', function () {
+        var response;
+
+        before(function (done) {
+            server.inject({
+                method: 'POST',
+                url: '/dictionary',
+                payload: ['one', 'two', 'three']
+            }, function (res) {
+                response = res;
+                done();
+            });
+        });
+
+        it('return 200 status code', function (done) {
+            response.statusCode.should.equal(200);
+            done();
+        });
+
+        describe('when POSTing doublicates to /dictionary endpoint', function () {
+            before(function (done) {
+                server.inject({
+                    method: 'GET',
+                    url: '/search/foo',
+                }, function (res) {
+                    done();
+                });
+            });
+
+            it('return 200 status code', function (done) {
+                done();
+            });
+
+            it('return array of words', function (done) {
+                done();
+            });
+        });
+
+        // describe('when GETting existing string with /search endpoint', function () {
+        //     before(function (done) {
+        //         server.inject({
+        //             method: 'GET',
+        //             url: '/search/foo',
+        //         }, function (res) {
+        //             done();
+        //         });
+        //     });
+
+        //     it('return 200 status code', function (done) {
+        //         done();
+        //     });
+
+        //     it('return array of words', function (done) {
+        //         done();
+        //     });
+        // });
+    });
+
+
+    describe('when POSTing to /dictionary endpoint with NON-valid data', function () {
+        var response;
+
+        before(function (done) {
+            server.inject({
+                method: 'POST',
+                url: '/dictionary',
+                payload: {}
+            }, function (res) {
+                response = res;
+                done();
+            });
+        });
+
+        it('return 400 status code', function (done) {
+            response.statusCode.should.equal(400);
+            done();
         });
     });
 
     describe('when GETting NON-existing string with /search endpoint', function () {
+        // before(function (done) {
+        //     server.inject({
+        //         method: 'GET',
+        //         url: '/search/abracadabra!',
+        //     }, function (res) {
+        //         done();
+        //     });
+        // });
 
+        // it('return 200 status code', function (done) {
+        //     done();
+        // });
+
+        // it('return an empty array', function (done) {
+        //     done();
+        // });
     });
 });
