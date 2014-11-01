@@ -33,7 +33,7 @@ describe('micro search engine', function () {
             done();
         });
 
-        describe('when POSTing doublicates to /dictionary endpoint', function () {
+        describe('when POSTing duplicates to /dictionary endpoint', function () {
             before(function (done) {
                 server.inject({
                     method: 'POST',
@@ -71,7 +71,7 @@ describe('micro search engine', function () {
                     done();
                 });
 
-                it('should contain strings that are lowercase and without doublicates', function (done) {
+                it('should contain strings that are lowercase and without duplicates', function (done) {
                     response.result[0].should.equal('foo');
                     response.result[1].should.equal('foogazi');
                     done();
