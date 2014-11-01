@@ -1,7 +1,7 @@
 {
   "name": "resin-io-hapi",
-  "version": "0.0.0",
-  "description": "",
+  "version": "0.1.0",
+  "description": "Small application build for the guys from http://resin.io/",
   "main": "app.js",
   "scripts": {
     "start": "node app.js",
